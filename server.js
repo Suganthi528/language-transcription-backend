@@ -15,10 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/static', express.static('public'));
 
-// Ensure required directories exist
-const fs = require('fs');
-const path = require('path');
-
 // Create directories if they don't exist
 const requiredDirs = ['uploads', 'public'];
 requiredDirs.forEach(dir => {
@@ -370,7 +366,7 @@ app.get("/rooms", (req, res) => {
 
 app.post("/create-room", (req, res) => {
   const { roomName, password, creatorName } = req.body;
-  const roomId = roomName || `room_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  const roomId = roomName || `room_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
   
   // Check if room already exists
   if (rooms.has(roomId)) {
